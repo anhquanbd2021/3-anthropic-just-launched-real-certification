@@ -1,0 +1,136 @@
+// Self-assessment: 10 judgment-call questions, 2 per domain.
+// These are educational approximations in the *style* of scenario-based
+// judgment questions — not actual exam items.
+
+export const QUESTIONS = [
+  {
+    id: 'q-orch-1',
+    domain: 'orchestration',
+    stem: 'A customer support agent can issue refunds via a tool call. Before launch, which control belongs in the architecture?',
+    options: [
+      'A larger context window so the agent sees more policy text',
+      'A human-approval gate for irreversible actions above a threshold',
+      'A retry loop so the agent can re-issue a mistaken refund',
+      'A lower temperature so the agent refunds more conservatively',
+    ],
+    answer: 1,
+    why: 'Irreversible actions need an explicit autonomy boundary — a designed decision, not a sampling parameter. This is the core of the 27% domain.',
+  },
+  {
+    id: 'q-orch-2',
+    domain: 'orchestration',
+    stem: 'A research agent\'s response arrives with stop_reason "max_tokens" mid-synthesis. What should the orchestration loop do?',
+    options: [
+      'Treat the partial output as final and return it to the user',
+      'Retry the identical request and hope for a shorter answer',
+      'Treat the turn as incomplete and continue generation deliberately',
+      'Restart the whole research task from scratch',
+    ],
+    answer: 2,
+    why: 'stop_reason is a routing signal: max_tokens means "truncated, continue" — not success, not a reason to restart. Loops that ignore it silently ship truncated answers.',
+  },
+  {
+    id: 'q-cc-1',
+    domain: 'claude-code',
+    stem: 'A team wants Claude Code to follow repo conventions (test layout, lint rules, review checklist) without repeating them in every prompt. Where do the instructions belong?',
+    options: [
+      'In a CLAUDE.md checked into the repo',
+      'In each engineer\'s prompt history',
+      'In a longer system prompt pasted per session',
+      'In the CI logs for the agent to discover',
+    ],
+    answer: 0,
+    why: 'Project-level instruction files are the mechanism for shared, versioned conventions — the exam tests whether you configure once rather than prompt repeatedly.',
+  },
+  {
+    id: 'q-cc-2',
+    domain: 'claude-code',
+    stem: 'You\'re wiring Claude Code into a CI pipeline that comments on PRs. Which permission posture fits?',
+    options: [
+      'Full access — CI is trusted infrastructure',
+      'A restricted allowlist: only the tools the pipeline step needs',
+      'Interactive approval prompts on every tool call',
+      'Whatever the developer\'s local config happens to be',
+    ],
+    answer: 1,
+    why: 'CI is non-interactive and high-blast-radius: least-privilege tool allowlists are the correct default. Interactive prompts would hang the pipeline.',
+  },
+  {
+    id: 'q-prompt-1',
+    domain: 'prompting',
+    stem: 'An extraction pipeline occasionally returns malformed JSON that breaks the consumer. What is the architectural fix?',
+    options: [
+      'Add "please return valid JSON" more emphatically to the prompt',
+      'Define the output as a schema (tool use / structured output) and validate + retry on parse failure',
+      'Ask the model to double-check its own JSON before replying',
+      'Increase max_tokens so the JSON has room to finish',
+    ],
+    answer: 1,
+    why: 'Structure belongs in the contract, not in politeness. Schema-constrained output plus a validation-and-retry loop turns a probabilistic failure into a handled one.',
+  },
+  {
+    id: 'q-prompt-2',
+    domain: 'prompting',
+    stem: 'A classifier must tag tickets into exactly 8 support categories, but the model keeps inventing a ninth. The fix is:',
+    options: [
+      'Enumerate the allowed labels in the prompt/schema so the output space is closed',
+      'Fine-tune the model on the taxonomy',
+      'Lower the temperature to zero',
+      'Post-process: delete any label that isn\'t in the list',
+    ],
+    answer: 0,
+    why: 'Close the output space upstream. Silently dropping invalid labels hides the failure instead of fixing it; fine-tuning is out of scope for this blueprint for a reason.',
+  },
+  {
+    id: 'q-tools-1',
+    domain: 'tools',
+    stem: 'A tool returns the string "ok" for both "query ran, 0 rows" and "query failed but was caught". The agent keeps misbehaving. Why?',
+    options: [
+      'The model needs more examples of tool calls',
+      'The tool contract is ambiguous — success and error must be structurally distinguishable',
+      'The agent needs a bigger context window',
+      'The tool should return longer prose explanations',
+    ],
+    answer: 1,
+    why: 'Tools are contracts. If a caller can\'t distinguish failure from empty success structurally, no amount of prompting fixes the downstream misbehavior.',
+  },
+  {
+    id: 'q-tools-2',
+    domain: 'tools',
+    stem: 'Designing an MCP integration for a research agent, the better default is:',
+    options: [
+      'One mega-tool that accepts a free-text command for every action',
+      'A few narrowly-scoped tools with typed inputs and clear contracts',
+      'As many tools as possible — more tools means more capability',
+      'Tools that return raw HTML for the model to parse',
+    ],
+    answer: 1,
+    why: 'Granularity is a judgment call: typed, well-scoped tools give the model a reliable action vocabulary; a mega-tool pushes parsing burden into every call.',
+  },
+  {
+    id: 'q-context-1',
+    domain: 'context',
+    stem: 'A long-running agent gets noticeably worse after a few hours — it forgets early decisions and repeats itself. The reliability fix is:',
+    options: [
+      'Restart it more often',
+      'A compaction/summarization strategy that preserves task state as context fills',
+      'A stronger system prompt reminding it not to forget',
+      'Feeding it the entire transcript on every turn',
+    ],
+    answer: 1,
+    why: 'Context windows are finite; long-running agents need explicit state management. This is the 15% domain the field learned through outages.',
+  },
+  {
+    id: 'q-context-2',
+    domain: 'context',
+    stem: 'An agent calls the same failing tool 40 times in a loop and burns its budget. What was missing?',
+    options: [
+      'A faster tool endpoint',
+      'Retry caps and loop detection that escalate instead of burning',
+      'A bigger model',
+      'More detailed tool descriptions',
+    ],
+    answer: 1,
+    why: 'Reliability engineering: bounded retries and loop detection convert a silent burn into a visible, handled failure — ideally with escalation.',
+  },
+];

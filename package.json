@@ -1,0 +1,16 @@
+{
+  "name": "cert-blueprint-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Cert Blueprint — read the Claude Certified Architect exam blueprint as a skills signal: domain weights, scenario sampler, self-assessment.",
+  "scripts": {
+    "start": "node app/server.js",
+    "report": "node scripts/report.mjs",
+    "test": "node --test \"test/*.test.mjs\"",
+    "check": "npm test && npm run report"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "description": "Sample answers for the 10-question self-assessment. Deliberately weak on orchestration (the 27% domain) so the report shows weakness-adjusted budgeting.",
+  "answers": {
+    "q-orch-1": 0,
+    "q-orch-2": 0,
+    "q-cc-1": 0,
+    "q-cc-2": 1,
+    "q-prompt-1": 1,
+    "q-prompt-2": 0,
+    "q-tools-1": 1,
+    "q-tools-2": 1,
+    "q-context-1": 0,
+    "q-context-2": 1
+  }
+}

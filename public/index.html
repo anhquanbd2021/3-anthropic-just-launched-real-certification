@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Cert Blueprint — explore the Claude Certified Architect exam blueprint as a skills signal: domain weights, scenario sampler, self-assessment.">
+  <title>Cert Blueprint — the exam map is the signal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:ital,wght@0,100..900&family=Space+Grotesk:wght@500..700&display=swap">
+  <link rel="stylesheet" href="/styles.css">
+<!-- pb-shell --><link rel="stylesheet" href="./pb-shell.css"><!-- pb-shell --><!-- pb-back --><link rel="stylesheet" href="./pb-back.css"><!-- pb-back --></head>
+<body>
+<a class="skip-link" href="#weights-title">Skip to the labs</a>
+<main>
+  <nav aria-label="Primary"><a aria-current="page" href="/">Lab</a><a href="/guide.html">Guide</a><a href="https://github.com/anhquanbd2021/3-anthropic-just-launched-real-certification">Source</a></nav>
+  <header class="hero">
+    <div><p class="eyebrow">Cert Blueprint · Claude Certified Architect (Foundations)</p><h1>The exam map is the signal.</h1><p class="lede">A vendor certification is a proxy — but the published blueprint is real data. Five weighted domains, six production scenarios, and an out-of-scope list that says exactly which knowledge has commoditized. Explore it like a hiring signal, not a badge.</p></div>
+    <p class="warning"><strong>Educational, unofficial.</strong> Weights and scenarios reflect the public exam guide; this lab is not affiliated with or endorsed by Anthropic.</p>
+  </header>
+
+  <section class="workspace" aria-label="Domain weight map">
+    <section class="panel" aria-labelledby="weights-title">
+      <div class="section-heading"><div><p class="eyebrow">Weight map</p><h2 id="weights-title">Five domains, ranked</h2></div><span class="badge">Σ = <span id="weight-sum">—</span>%</span></div>
+      <ol id="weight-map" class="weights" aria-label="Domain weights"></ol>
+      <p class="muted">The 15–27% spread makes every domain mandatory; the ranking says orchestration judgment outranks model knowledge.</p>
+    </section>
+    <section class="panel" aria-labelledby="signal-title">
+      <div><p class="eyebrow">Negative space</p><h2 id="signal-title">What the exam refuses to test</h2></div>
+      <ul id="out-of-scope" class="scope-list" aria-label="Out-of-scope topics"></ul>
+      <p class="muted">Every exclusion is a market claim: model internals commoditized; the skill boundary moved up the stack to the system around the model.</p>
+    </section>
+  </section>
+
+  <section class="workspace" aria-label="Scenario sampler">
+    <section class="panel controls" aria-labelledby="sampler-title">
+      <div><p class="eyebrow">Scenario sampler</p><h2 id="sampler-title">Draw a sitting: 4 of 6</h2></div>
+      <label for="seed">Seed<input id="seed" type="number" value="7" min="0"></label>
+      <button id="draw" type="button">Draw 4 of 6 scenarios</button>
+      <p class="muted">Each real sitting draws four of the six production scenarios. Two always sit out — watch which domains a draw can miss entirely.</p>
+    </section>
+    <section class="panel" aria-labelledby="draw-title">
+      <div class="section-heading"><div><p class="eyebrow">Your sitting</p><h2 id="draw-title">Scenarios drawn</h2></div><span id="coverage-badge" class="badge" role="status" aria-live="polite">Not drawn yet</span></div>
+      <ol id="draw-list" class="results" aria-label="Drawn scenarios"></ol>
+      <div id="coverage" class="chips" aria-label="Domain coverage of this draw"></div>
+    </section>
+  </section>
+
+  <section class="workspace workspace--quiz" aria-label="Self assessment">
+    <section class="panel controls" aria-labelledby="quiz-title">
+      <div><p class="eyebrow">Self-assessment</p><h2 id="quiz-title">10 judgment calls, 2 per domain</h2></div>
+      <div id="quiz" class="quiz"></div>
+      <button id="score" type="button">Score my blueprint fit</button>
+      <label for="hours">Study hours available<input id="hours" type="number" value="60" min="1"></label>
+    </section>
+    <section class="panel" aria-labelledby="verdict-title">
+      <div class="section-heading"><div><p class="eyebrow">Verdict</p><h2 id="verdict-title">Where the blueprint finds you</h2></div><span id="verdict-badge" class="badge" role="status" aria-live="polite">Awaiting answers</span></div>
+      <ol id="verdict" class="results" aria-label="Per-domain results"></ol>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Suggested study budget"><table id="budget-table" aria-label="Suggested study budget"></table></div>
+      <p class="muted">Baseline: hours split proportional to official weights; the weakest domain's share is doubled, then renormalized — study by weight and weakness, not by interest.</p>
+    </section>
+  </section>
+
+  <p class="page-foot"><a href="/guide.html">Read the blueprint guide</a> · <a href="https://github.com/anhquanbd2021/3-anthropic-just-launched-real-certification">Inspect source and tests</a></p>
+</main>
+<script type="module" src="/app.js"></script>
+<!-- pb-shell --><a class="pb-shell" href="https://github.com/anhquanbd2021/3-anthropic-just-launched-real-certification" title="3-anthropic-just-launched-real-certification — an Article Playbook demo (view source)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2" fill="#2dd4bf"/><rect x="13" y="2" width="9" height="9" rx="2" fill="#2dd4bf" opacity=".45"/><rect x="2" y="13" width="9" height="9" rx="2" fill="#2dd4bf" opacity=".45"/><rect x="13" y="13" width="9" height="9" rx="4.5" fill="#2dd4bf"/></svg><b>3-anthropic-just-launched-real-certification</b><i>DEMO</i></a><!-- pb-shell --><!-- pb-back --><a class="pb-back" id="pb-back" href="https://github.com/anhquanbd2021/3-anthropic-just-launched-real-certification" title="Back to the article — 3-anthropic-just-launched-real-certification">← Article <i>PLAYBOOK</i></a><script>(function(){var a=document.getElementById('pb-back');if(!a)return;var h=location.hostname;if(/^(localhost|127\.0\.0\.1|192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.)/.test(h)){a.href='//'+h+':'+(/^(localhost|127\.0\.0\.1)$/.test(h)?'1234':'30082')+'/microsites/article.html?slug=3-anthropic-just-launched-real-certification';}})();</script><!-- pb-back --></body>
+</html>
